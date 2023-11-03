@@ -14,7 +14,7 @@
 ## Usage
 
 ```csharp
-Complex<Pow2.N8> z = "1+16i"; // z = (1, 16), new Complex(1, 16);
+Complex<Pow2.N8> z = "1+16i"; // z = (1, 16), new Complex<Pow2.N8>(1, 16);
 Complex<Pow2.N8> c = z * z;
 
 Console.WriteLine(c);
