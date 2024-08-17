@@ -1,4 +1,6 @@
 ﻿using MultiPrecision;
+using System.Numerics;
+using System;
 
 namespace MultiPrecisionComplex {
 
@@ -41,35 +43,29 @@ namespace MultiPrecisionComplex {
         }
 
         public static Complex<N> Tan(Complex<N> z) {
-            // Im(z) > bits * log(2)
-            if (MultiPrecision<N>.Abs(z.I) > MultiPrecision<N>.Bits * 0.69315) {
-                return z.I.Sign == Sign.Plus ? (0, 1) : (0, -1); 
+            MultiPrecision<N> u = MultiPrecision<N>.Exp(-MultiPrecision<N>.Abs(2d * z.I));
+            MultiPrecision<N> norm = 1d + u * (2d * MultiPrecision<N>.Cos(2d * z.R) + u);
+
+            Complex<N> c = new Complex<N>(2d * u * MultiPrecision<N>.Sin(2d * z.R), (u + 1d) * (u - 1d)) / norm;
+
+            if (z.I > 0d) {
+                c = Conjugate(c);
             }
 
-            MultiPrecision<N> r_sin = MultiPrecision<N>.Sin(z.R), r_cos = MultiPrecision<N>.Cos(z.R);
-            MultiPrecision<N> i_sinh = MultiPrecision<N>.Sinh(z.I), i_cosh = MultiPrecision<N>.Cosh(z.I);
-
-            Complex<N> s = new(r_sin * i_cosh, r_cos * i_sinh);
-            Complex<N> c = new(r_cos * i_cosh, -r_sin * i_sinh);
-
-            return s / c;
+            return c; 
         }
 
         public static Complex<N> TanPI(Complex<N> z) {
-            // Im(z) * pi > bits * log(2)
-            if (MultiPrecision<N>.Abs(z.I) > MultiPrecision<N>.Bits * 0.22064) {
-                return z.I.Sign == Sign.Plus ? (0, 1) : (0, -1); 
+            MultiPrecision<N> u = MultiPrecision<N>.Exp(-MultiPrecision<N>.Abs(2d * z.I * MultiPrecision<N>.PI));
+            MultiPrecision<N> norm = 1d + u * (2d * MultiPrecision<N>.CosPI(2d * z.R) + u);
+
+            Complex<N> c = new Complex<N>(2d * u * MultiPrecision<N>.SinPI(2d * z.R), (u + 1d) * (u - 1d)) / norm;
+
+            if (z.I > 0d) {
+                c = Conjugate(c);
             }
-            
-            MultiPrecision<N> i_pi = z.I * MultiPrecision<N>.PI;
 
-            MultiPrecision<N> r_sin = MultiPrecision<N>.SinPI(z.R), r_cos = MultiPrecision<N>.CosPI(z.R);
-            MultiPrecision<N> i_sinh = MultiPrecision<N>.Sinh(i_pi), i_cosh = MultiPrecision<N>.Cosh(i_pi);
-
-            Complex<N> s = new(r_sin * i_cosh, r_cos * i_sinh);
-            Complex<N> c = new(r_cos * i_cosh, -r_sin * i_sinh);
-
-            return s / c;
+            return c; 
         }
 
         public static Complex<N> Sinh(Complex<N> z) {
