@@ -44,28 +44,34 @@ namespace MultiPrecisionComplex {
 
         public static Complex<N> Tan(Complex<N> z) {
             MultiPrecision<N> u = MultiPrecision<N>.Exp(-MultiPrecision<N>.Abs(2d * z.I));
-            MultiPrecision<N> norm = 1d + u * (2d * MultiPrecision<N>.Cos(2d * z.R) + u);
-
-            Complex<N> c = new Complex<N>(2d * u * MultiPrecision<N>.Sin(2d * z.R), (u + 1d) * (u - 1d)) / norm;
-
-            if (z.I > 0d) {
-                c = Conjugate(c);
+            
+            if (u == 1.0) {
+                return MultiPrecision<N>.Tan(z.R);
             }
 
-            return c; 
+            MultiPrecision<N> n = 1d + u * (2d * MultiPrecision<N>.Cos(2d * z.R) + u);
+
+            MultiPrecision<N> r = 2d * u * MultiPrecision<N>.Sin(2d * z.R) / n;
+            MultiPrecision<N> i = (u + 1d) * (u - 1d) / n;
+            Complex<N> c = (z.I > 0d) ? (r, -i) : (r, i);
+
+            return c;
         }
 
         public static Complex<N> TanPI(Complex<N> z) {
             MultiPrecision<N> u = MultiPrecision<N>.Exp(-MultiPrecision<N>.Abs(2d * z.I * MultiPrecision<N>.PI));
-            MultiPrecision<N> norm = 1d + u * (2d * MultiPrecision<N>.CosPI(2d * z.R) + u);
-
-            Complex<N> c = new Complex<N>(2d * u * MultiPrecision<N>.SinPI(2d * z.R), (u + 1d) * (u - 1d)) / norm;
-
-            if (z.I > 0d) {
-                c = Conjugate(c);
+            
+            if (u == 1.0) {
+                return MultiPrecision<N>.TanPI(z.R);
             }
 
-            return c; 
+            MultiPrecision<N> n = 1d + u * (2d * MultiPrecision<N>.CosPI(2d * z.R) + u);
+
+            MultiPrecision<N> r = 2d * u * MultiPrecision<N>.SinPI(2d * z.R) / n;
+            MultiPrecision<N> i = (u + 1d) * (u - 1d) / n;
+            Complex<N> c = (z.I > 0d) ? (r, -i) : (r, i);
+
+            return c;
         }
 
         public static Complex<N> Sinh(Complex<N> z) {
