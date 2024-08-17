@@ -58,7 +58,8 @@ namespace MultiPrecisionComplexTests {
 
         [TestMethod()]
         public void TanTest() {
-            foreach (Complex<Pow2.N8> z in new[] { (1, 2), (2, 5), (6, -3), (7, -4), (3, -9), (7, 1), (-3, -4), (-1, -9), (-2, 1) }) {
+            foreach (Complex<Pow2.N8> z in new[] { (1, 2), (2, 5), (6, -3), (7, -4), (3, -9), (7, 1), (-3, -4), (-1, -9), (-2, 1), 
+                (-2, 32), (-2, -32), (-2, 256), (-2, -256) }) {
                 Complex<Pow2.N8> c = Complex<Pow2.N8>.Tan(z);
                 NComplex nc = NComplex.Tan((NComplex)z);
 
@@ -68,7 +69,8 @@ namespace MultiPrecisionComplexTests {
 
         [TestMethod()]
         public void TanPITest() {
-            foreach (Complex<Pow2.N8> z in new[] { (1, 2), (2, 5), (6, -3), (7, -4), (3, -9), (7, 1), (-3, -4), (-1, -9), (-2, 1) }) {
+            foreach (Complex<Pow2.N8> z in new[] { (1, 2), (2, 5), (6, -3), (7, -4), (3, -9), (7, 1), (-3, -4), (-1, -9), (-2, 1), 
+                (-2, 32), (-2, -32), (-2, 256), (-2, -256) }) {
                 Complex<Pow2.N8> c = Complex<Pow2.N8>.TanPI(z);
                 NComplex nc = NComplex.Tan((NComplex)(z * MultiPrecision<Pow2.N8>.PI));
 

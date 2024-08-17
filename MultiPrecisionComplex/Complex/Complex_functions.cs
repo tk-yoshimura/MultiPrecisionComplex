@@ -41,6 +41,11 @@ namespace MultiPrecisionComplex {
         }
 
         public static Complex<N> Tan(Complex<N> z) {
+            // Im(z) > bits * log(2)
+            if (MultiPrecision<N>.Abs(z.I) > MultiPrecision<N>.Bits * 0.69315) {
+                return z.I.Sign == Sign.Plus ? (0, 1) : (0, -1); 
+            }
+
             MultiPrecision<N> r_sin = MultiPrecision<N>.Sin(z.R), r_cos = MultiPrecision<N>.Cos(z.R);
             MultiPrecision<N> i_sinh = MultiPrecision<N>.Sinh(z.I), i_cosh = MultiPrecision<N>.Cosh(z.I);
 
@@ -51,6 +56,11 @@ namespace MultiPrecisionComplex {
         }
 
         public static Complex<N> TanPI(Complex<N> z) {
+            // Im(z) * pi > bits * log(2)
+            if (MultiPrecision<N>.Abs(z.I) > MultiPrecision<N>.Bits * 0.22064) {
+                return z.I.Sign == Sign.Plus ? (0, 1) : (0, -1); 
+            }
+            
             MultiPrecision<N> i_pi = z.I * MultiPrecision<N>.PI;
 
             MultiPrecision<N> r_sin = MultiPrecision<N>.SinPI(z.R), r_cos = MultiPrecision<N>.CosPI(z.R);
