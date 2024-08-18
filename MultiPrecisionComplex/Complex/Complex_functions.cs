@@ -1,6 +1,4 @@
 ﻿using MultiPrecision;
-using System.Numerics;
-using System;
 
 namespace MultiPrecisionComplex {
 
@@ -44,7 +42,7 @@ namespace MultiPrecisionComplex {
 
         public static Complex<N> Tan(Complex<N> z) {
             MultiPrecision<N> u = MultiPrecision<N>.Exp(-MultiPrecision<N>.Abs(2d * z.I));
-            
+
             if (u == 1.0) {
                 return MultiPrecision<N>.Tan(z.R);
             }
@@ -58,7 +56,7 @@ namespace MultiPrecisionComplex {
 
                 return c;
             }
-            else { 
+            else {
                 MultiPrecision<N> x = z.R * MultiPrecision<N>.RcpPI - MultiPrecision<N>.Point5;
                 x = (x - MultiPrecision<N>.Round(x)) * MultiPrecision<N>.PI;
 
@@ -72,7 +70,7 @@ namespace MultiPrecisionComplex {
 
         public static Complex<N> TanPI(Complex<N> z) {
             MultiPrecision<N> u = MultiPrecision<N>.Exp(-MultiPrecision<N>.Abs(2d * z.I * MultiPrecision<N>.PI));
-            
+
             if (u == 1.0) {
                 return MultiPrecision<N>.TanPI(z.R);
             }
@@ -86,7 +84,7 @@ namespace MultiPrecisionComplex {
 
                 return c;
             }
-            else { 
+            else {
                 MultiPrecision<N> x = z.R - MultiPrecision<N>.Point5;
                 x = (x - MultiPrecision<N>.Round(x)) * MultiPrecision<N>.PI;
 
