@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MultiPrecision;
 using MultiPrecisionComplex;
+using System;
 
 namespace MultiPrecisionComplexTests {
     using NComplex = System.Numerics.Complex;
@@ -71,6 +72,44 @@ namespace MultiPrecisionComplexTests {
         }
 
         [TestMethod()]
+        public void TanNearPoleTest() {
+            for (MultiPrecision<Pow2.N8> eps = "0.1"; eps >= "1e-8"; eps /= 10) {
+                foreach (MultiPrecision<Pow2.N8> x in new[] { -4.5, -3.5, -2.5, -1.5, -0.5, 0.5, 1.5, 2.5, 3.5, 4.5 }) {
+                    foreach (Complex<Pow2.N8> z in new[] { (eps, eps), (eps, 0), (eps, -eps), (0, eps), (0, -eps), (-eps, eps), (-eps, 0), (-eps, -eps) }) {
+
+                        Complex<Pow2.N8> c = Complex<Pow2.N8>.Tan((z + x) * MultiPrecision<Pow2.N8>.PI);
+                        NComplex nc = -1 / NComplex.Tan((NComplex)(z * MultiPrecision<Pow2.N8>.PI));
+
+                        Console.WriteLine(z);
+                        Console.WriteLine(c);
+                        Console.WriteLine(nc);
+
+                        Assert.AreEqual(nc.Real, (double)c.R, double.Abs(nc.Real) * 1e-7 + 1e-15);
+                        Assert.AreEqual(nc.Imaginary, (double)c.I, double.Abs(nc.Imaginary) * 1e-7 + 1e-15);
+                    }
+                }
+            }
+
+            for (MultiPrecision<Pow2.N8> eps = 1d / 65536; eps.Exponent >= -128; eps /= 2) {
+                foreach (Complex<Pow2.N8> z in new[] { (eps, eps), (eps, 0), (eps, -eps), (0, eps), (0, -eps), (-eps, eps), (-eps, 0), (-eps, -eps) }) {
+                    Complex<Pow2.N8> z_pi = z * MultiPrecision<Pow2.N8>.PI, z_pi2 = z_pi * z_pi;
+
+                    Complex<Pow2.N8> expected = -638512875 / (z_pi * (638512875 + z_pi2 * (212837625 + z_pi2 * (85135050 +
+                        z_pi2 * (34459425 + z_pi2 * (13963950 + z_pi2 * (5659290 + z_pi2 * (2293620 + z_pi2 * 929569))))))));
+
+                    Complex<Pow2.N8> actual = Complex<Pow2.N8>.Tan(z_pi + 0.5 * MultiPrecision<Pow2.N8>.PI);
+
+                    Console.WriteLine(z);
+                    Console.WriteLine(expected);
+                    Console.WriteLine(actual);
+
+                    Assert.IsTrue(MultiPrecision<Pow2.N8>.Abs(expected.R - actual.R) < MultiPrecision<Pow2.N8>.Abs(expected.R) * 1e-35 + 1e-35);
+                    Assert.IsTrue(MultiPrecision<Pow2.N8>.Abs(expected.I - actual.I) < MultiPrecision<Pow2.N8>.Abs(expected.I) * 1e-35 + 1e-35);
+                }
+            }
+        }
+
+        [TestMethod()]
         public void TanPITest() {
             foreach (Complex<Pow2.N8> z in new[] { (0, 0), (0, 0.25),
                 (1, 2), (2, 5), (6, -3), (7, -4), (-6, -3), (-7, -4), 
@@ -81,6 +120,44 @@ namespace MultiPrecisionComplexTests {
                 NComplex nc = NComplex.Tan((NComplex)(z * MultiPrecision<Pow2.N8>.PI));
 
                 ComplexAssert<Pow2.N8>.AreEqual(nc, c, 1e-7);
+            }
+        }
+
+        [TestMethod()]
+        public void TanPINearPoleTest() {
+            for (MultiPrecision<Pow2.N8> eps = "0.1"; eps >= "1e-8"; eps /= 10) {
+                foreach (MultiPrecision<Pow2.N8> x in new[] { -4.5, -3.5, -2.5, -1.5, -0.5, 0.5, 1.5, 2.5, 3.5, 4.5 }) {
+                    foreach (Complex<Pow2.N8> z in new[] { (eps, eps), (eps, 0), (eps, -eps), (0, eps), (0, -eps), (-eps, eps), (-eps, 0), (-eps, -eps) }) {
+
+                        Complex<Pow2.N8> c = Complex<Pow2.N8>.TanPI(z + x);
+                        NComplex nc = -1 / NComplex.Tan((NComplex)(z * MultiPrecision<Pow2.N8>.PI));
+
+                        Console.WriteLine(z);
+                        Console.WriteLine(c);
+                        Console.WriteLine(nc);
+
+                        Assert.AreEqual(nc.Real, (double)c.R, double.Abs(nc.Real) * 1e-7 + 1e-280);
+                        Assert.AreEqual(nc.Imaginary, (double)c.I, double.Abs(nc.Imaginary) * 1e-7 + 1e-280);
+                    }
+                }
+            }
+
+            for (MultiPrecision<Pow2.N8> eps = 1d / 65536; eps.Exponent >= -128; eps /= 2) {
+                foreach (Complex<Pow2.N8> z in new[] { (eps, eps), (eps, 0), (eps, -eps), (0, eps), (0, -eps), (-eps, eps), (-eps, 0), (-eps, -eps) }) {
+                    Complex<Pow2.N8> z_pi = z * MultiPrecision<Pow2.N8>.PI, z_pi2 = z_pi * z_pi;
+
+                    Complex<Pow2.N8> expected = -638512875 / (z_pi * (638512875 + z_pi2 * (212837625 + z_pi2 * (85135050 +
+                        z_pi2 * (34459425 + z_pi2 * (13963950 + z_pi2 * (5659290 + z_pi2 * (2293620 + z_pi2 * 929569))))))));
+
+                    Complex<Pow2.N8> actual = Complex<Pow2.N8>.TanPI(z + 0.5);
+
+                    Console.WriteLine(z);
+                    Console.WriteLine(expected);
+                    Console.WriteLine(actual);
+
+                    Assert.IsTrue(MultiPrecision<Pow2.N8>.Abs(expected.R - actual.R) < MultiPrecision<Pow2.N8>.Abs(expected.R) * 1e-65 + 1e-50);
+                    Assert.IsTrue(MultiPrecision<Pow2.N8>.Abs(expected.I - actual.I) < MultiPrecision<Pow2.N8>.Abs(expected.I) * 1e-65 + 1e-50);
+                }
             }
         }
 

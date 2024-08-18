@@ -15,6 +15,6 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("E71B55EC-7E6D-4735-B7E1-5477CFFEAD09")]
 
-[assembly: AssemblyVersion("1.1.3.*")]
+[assembly: AssemblyVersion("1.1.4.*")]
 
 [assembly: InternalsVisibleTo("MultiPrecisionComplexTest")]
