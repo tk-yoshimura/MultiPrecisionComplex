@@ -49,7 +49,7 @@ namespace MultiPrecisionComplex {
 
             MultiPrecision<N> n = 1d + u * (2d * MultiPrecision<N>.Cos(2d * z.R) + u);
 
-            if (n.Exponent > -MultiPrecision<N>.Bits / 5) {
+            if (n.Exponent > -8) {
                 MultiPrecision<N> r = 2d * u * MultiPrecision<N>.Sin(2d * z.R) / n;
                 MultiPrecision<N> i = (u + 1d) * (u - 1d) / n;
                 Complex<N> c = (z.I > 0d) ? (r, -i) : (r, i);
@@ -60,9 +60,9 @@ namespace MultiPrecisionComplex {
                 MultiPrecision<N> x = z.R * MultiPrecision<N>.RcpPI - MultiPrecision<N>.Point5;
                 x = (x - MultiPrecision<N>.Round(x)) * MultiPrecision<N>.PI;
 
-                Complex<N> w = (x, z.I), w2 = w * w;
+                Complex<N> w = (x, z.I);
 
-                Complex<N> c = -155925 / (w * (155925 + w2 * (51975 + w2 * (20790 + w2 * (8415 + w2 * (3410 + w2 * 1382))))));
+                Complex<N> c = -Cos(w) / Sin(w);
 
                 return c;
             }
@@ -77,7 +77,7 @@ namespace MultiPrecisionComplex {
 
             MultiPrecision<N> n = 1d + u * (2d * MultiPrecision<N>.CosPI(2d * z.R) + u);
 
-            if (n.Exponent > -MultiPrecision<N>.Bits / 5) {
+            if (n.Exponent > -8) {
                 MultiPrecision<N> r = 2d * u * MultiPrecision<N>.SinPI(2d * z.R) / n;
                 MultiPrecision<N> i = (u + 1d) * (u - 1d) / n;
                 Complex<N> c = (z.I > 0d) ? (r, -i) : (r, i);
@@ -86,11 +86,10 @@ namespace MultiPrecisionComplex {
             }
             else {
                 MultiPrecision<N> x = z.R - MultiPrecision<N>.Point5;
-                x = (x - MultiPrecision<N>.Round(x)) * MultiPrecision<N>.PI;
 
-                Complex<N> w = (x, z.I * MultiPrecision<N>.PI), w2 = w * w;
+                Complex<N> w = (x - MultiPrecision<N>.Round(x), z.I);
 
-                Complex<N> c = -155925 / (w * (155925 + w2 * (51975 + w2 * (20790 + w2 * (8415 + w2 * (3410 + w2 * 1382))))));
+                Complex<N> c = -CosPI(w) / SinPI(w);
 
                 return c;
             }

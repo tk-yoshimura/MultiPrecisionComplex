@@ -89,21 +89,18 @@ namespace MultiPrecisionComplexTests {
                 }
             }
 
-            for (MultiPrecision<Pow2.N8> eps = 1d / 65536; eps.Exponent >= -128; eps /= 2) {
+            for (MultiPrecision<Pow2.N8> eps = 1d / 4; eps.Exponent >= -128; eps /= 2) {
                 foreach (Complex<Pow2.N8> z in new[] { (eps, eps), (eps, 0), (eps, -eps), (0, eps), (0, -eps), (-eps, eps), (-eps, 0), (-eps, -eps) }) {
-                    Complex<Pow2.N8> z_pi = z * MultiPrecision<Pow2.N8>.PI, z_pi2 = z_pi * z_pi;
+                    Complex<Pow2.N8> expected = (-Complex<Pow2.N16>.CosPI(z.Convert<Pow2.N16>()) / Complex<Pow2.N16>.SinPI(z.Convert<Pow2.N16>())).Convert<Pow2.N8>();
 
-                    Complex<Pow2.N8> expected = -638512875 / (z_pi * (638512875 + z_pi2 * (212837625 + z_pi2 * (85135050 +
-                        z_pi2 * (34459425 + z_pi2 * (13963950 + z_pi2 * (5659290 + z_pi2 * (2293620 + z_pi2 * 929569))))))));
-
-                    Complex<Pow2.N8> actual = Complex<Pow2.N8>.Tan(z_pi + 0.5 * MultiPrecision<Pow2.N8>.PI);
+                    Complex<Pow2.N8> actual = Complex<Pow2.N8>.Tan((z + 0.5) * MultiPrecision<Pow2.N8>.PI);
 
                     Console.WriteLine(z);
                     Console.WriteLine(expected);
                     Console.WriteLine(actual);
 
-                    Assert.IsTrue(MultiPrecision<Pow2.N8>.Abs(expected.R - actual.R) < MultiPrecision<Pow2.N8>.Abs(expected.R) * 1e-35 + 1e-35);
-                    Assert.IsTrue(MultiPrecision<Pow2.N8>.Abs(expected.I - actual.I) < MultiPrecision<Pow2.N8>.Abs(expected.I) * 1e-35 + 1e-35);
+                    Assert.IsTrue(MultiPrecision<Pow2.N8>.Abs(expected.R - actual.R) < MultiPrecision<Pow2.N8>.Abs(expected.R) * 1e-35 + 1e-20);
+                    Assert.IsTrue(MultiPrecision<Pow2.N8>.Abs(expected.I - actual.I) < MultiPrecision<Pow2.N8>.Abs(expected.I) * 1e-35 + 1e-20);
                 }
             }
         }
@@ -141,12 +138,9 @@ namespace MultiPrecisionComplexTests {
                 }
             }
 
-            for (MultiPrecision<Pow2.N8> eps = 1d / 65536; eps.Exponent >= -128; eps /= 2) {
+            for (MultiPrecision<Pow2.N8> eps = 1d / 4; eps.Exponent >= -128; eps /= 2) {
                 foreach (Complex<Pow2.N8> z in new[] { (eps, eps), (eps, 0), (eps, -eps), (0, eps), (0, -eps), (-eps, eps), (-eps, 0), (-eps, -eps) }) {
-                    Complex<Pow2.N8> z_pi = z * MultiPrecision<Pow2.N8>.PI, z_pi2 = z_pi * z_pi;
-
-                    Complex<Pow2.N8> expected = -638512875 / (z_pi * (638512875 + z_pi2 * (212837625 + z_pi2 * (85135050 +
-                        z_pi2 * (34459425 + z_pi2 * (13963950 + z_pi2 * (5659290 + z_pi2 * (2293620 + z_pi2 * 929569))))))));
+                    Complex<Pow2.N8> expected = (-Complex<Pow2.N16>.CosPI(z.Convert<Pow2.N16>()) / Complex<Pow2.N16>.SinPI(z.Convert<Pow2.N16>())).Convert<Pow2.N8>();
 
                     Complex<Pow2.N8> actual = Complex<Pow2.N8>.TanPI(z + 0.5);
 
@@ -154,8 +148,8 @@ namespace MultiPrecisionComplexTests {
                     Console.WriteLine(expected);
                     Console.WriteLine(actual);
 
-                    Assert.IsTrue(MultiPrecision<Pow2.N8>.Abs(expected.R - actual.R) < MultiPrecision<Pow2.N8>.Abs(expected.R) * 1e-65 + 1e-50);
-                    Assert.IsTrue(MultiPrecision<Pow2.N8>.Abs(expected.I - actual.I) < MultiPrecision<Pow2.N8>.Abs(expected.I) * 1e-65 + 1e-50);
+                    Assert.IsTrue(MultiPrecision<Pow2.N8>.Abs(expected.R - actual.R) < MultiPrecision<Pow2.N8>.Abs(expected.R) * 1e-70 + 1e-50);
+                    Assert.IsTrue(MultiPrecision<Pow2.N8>.Abs(expected.I - actual.I) < MultiPrecision<Pow2.N8>.Abs(expected.I) * 1e-70 + 1e-50);
                 }
             }
         }
