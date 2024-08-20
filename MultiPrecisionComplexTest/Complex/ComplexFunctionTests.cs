@@ -103,6 +103,21 @@ namespace MultiPrecisionComplexTests {
                     Assert.IsTrue(MultiPrecision<Pow2.N8>.Abs(expected.I - actual.I) < MultiPrecision<Pow2.N8>.Abs(expected.I) * 1e-35 + 1e-20);
                 }
             }
+
+            for (MultiPrecision<Pow2.N16> eps = 1d / 4; eps.Exponent >= -128; eps /= 2) {
+                foreach (Complex<Pow2.N16> z in new[] { (eps, eps), (eps, 0), (eps, -eps), (0, eps), (0, -eps), (-eps, eps), (-eps, 0), (-eps, -eps) }) {
+                    Complex<Pow2.N16> expected = (-Complex<Pow2.N32>.CosPI(z.Convert<Pow2.N32>()) / Complex<Pow2.N32>.SinPI(z.Convert<Pow2.N32>())).Convert<Pow2.N16>();
+
+                    Complex<Pow2.N16> actual = Complex<Pow2.N16>.Tan((z + 0.5) * MultiPrecision<Pow2.N16>.PI);
+
+                    Console.WriteLine(z);
+                    Console.WriteLine(expected);
+                    Console.WriteLine(actual);
+
+                    Assert.IsTrue(MultiPrecision<Pow2.N16>.Abs(expected.R - actual.R) < MultiPrecision<Pow2.N16>.Abs(expected.R) * 1e-70 + 1e-40);
+                    Assert.IsTrue(MultiPrecision<Pow2.N16>.Abs(expected.I - actual.I) < MultiPrecision<Pow2.N16>.Abs(expected.I) * 1e-70 + 1e-40);
+                }
+            }
         }
 
         [TestMethod()]
@@ -150,6 +165,21 @@ namespace MultiPrecisionComplexTests {
 
                     Assert.IsTrue(MultiPrecision<Pow2.N8>.Abs(expected.R - actual.R) < MultiPrecision<Pow2.N8>.Abs(expected.R) * 1e-70 + 1e-50);
                     Assert.IsTrue(MultiPrecision<Pow2.N8>.Abs(expected.I - actual.I) < MultiPrecision<Pow2.N8>.Abs(expected.I) * 1e-70 + 1e-50);
+                }
+            }
+
+            for (MultiPrecision<Pow2.N16> eps = 1d / 4; eps.Exponent >= -128; eps /= 2) {
+                foreach (Complex<Pow2.N16> z in new[] { (eps, eps), (eps, 0), (eps, -eps), (0, eps), (0, -eps), (-eps, eps), (-eps, 0), (-eps, -eps) }) {
+                    Complex<Pow2.N16> expected = (-Complex<Pow2.N32>.CosPI(z.Convert<Pow2.N32>()) / Complex<Pow2.N32>.SinPI(z.Convert<Pow2.N32>())).Convert<Pow2.N16>();
+
+                    Complex<Pow2.N16> actual = Complex<Pow2.N16>.TanPI(z + 0.5);
+
+                    Console.WriteLine(z);
+                    Console.WriteLine(expected);
+                    Console.WriteLine(actual);
+
+                    Assert.IsTrue(MultiPrecision<Pow2.N16>.Abs(expected.R - actual.R) < MultiPrecision<Pow2.N16>.Abs(expected.R) * 1e-140 + 1e-100);
+                    Assert.IsTrue(MultiPrecision<Pow2.N16>.Abs(expected.I - actual.I) < MultiPrecision<Pow2.N16>.Abs(expected.I) * 1e-140 + 1e-100);
                 }
             }
         }
