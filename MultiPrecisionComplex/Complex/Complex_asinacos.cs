@@ -1,6 +1,4 @@
-﻿using MultiPrecision;
-
-namespace MultiPrecisionComplex {
+﻿namespace MultiPrecisionComplex {
 
     public partial class Complex<N> {
 
