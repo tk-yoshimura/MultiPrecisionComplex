@@ -28,6 +28,14 @@ namespace MultiPrecisionComplex {
 
         public static Quaternion<N> Normal(Quaternion<N> q) => q / q.Norm;
 
+        public static Quaternion<N> VectorPart(Quaternion<N> q) {
+            return new Quaternion<N>(MultiPrecision<N>.Zero, q.I, q.J, q.K);
+        }
+
+        public static Quaternion<N> RealPart(Quaternion<N> q) {
+            return new Quaternion<N>(q.R, MultiPrecision<N>.Zero, MultiPrecision<N>.Zero, MultiPrecision<N>.Zero);
+        }
+
         public Quaternion(MultiPrecision<N> r, MultiPrecision<N> i, MultiPrecision<N> j, MultiPrecision<N> k) {
             this.R = r;
             this.I = i;
