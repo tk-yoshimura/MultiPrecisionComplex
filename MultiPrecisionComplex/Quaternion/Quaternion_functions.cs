@@ -34,46 +34,46 @@ namespace MultiPrecisionComplex {
             return new Quaternion<N>(q.R, MultiPrecision<N>.Zero, MultiPrecision<N>.Zero, MultiPrecision<N>.Zero);
         }
 
-        //public static Quaternion<N> Sin(Quaternion<N> q) {
-        //    MultiPrecision<N> vnorm = VectorPart(q).Magnitude;
-        //    MultiPrecision<N> w = MultiPrecision<N>.Cos(q.R) * MultiPrecision<N>.Sinhc(vnorm);
+        public static Quaternion<N> Sin(Quaternion<N> q) {
+            MultiPrecision<N> vnorm = VectorPart(q).Magnitude;
+            MultiPrecision<N> w = MultiPrecision<N>.Cos(q.R) * MultiPrecision<N>.Sinhc(vnorm);
 
-        //    Quaternion<N> p = new(MultiPrecision<N>.Sin(q.R) * MultiPrecision<N>.Cosh(vnorm), w * q.I, w * q.J, w * q.K);
+            Quaternion<N> p = new(MultiPrecision<N>.Sin(q.R) * MultiPrecision<N>.Cosh(vnorm), w * q.I, w * q.J, w * q.K);
 
-        //    return p;
-        //}
+            return p;
+        }
 
-        //public static Quaternion<N> Cos(Quaternion<N> q) {
-        //    MultiPrecision<N> vnorm = VectorPart(q).Magnitude;
-        //    MultiPrecision<N> w = -MultiPrecision<N>.Sin(q.R) * MultiPrecision<N>.Sinhc(vnorm);
+        public static Quaternion<N> Cos(Quaternion<N> q) {
+            MultiPrecision<N> vnorm = VectorPart(q).Magnitude;
+            MultiPrecision<N> w = -MultiPrecision<N>.Sin(q.R) * MultiPrecision<N>.Sinhc(vnorm);
 
-        //    Quaternion<N> p = new(MultiPrecision<N>.Cos(q.R) * MultiPrecision<N>.Cosh(vnorm), w * q.I, w * q.J, w * q.K);
+            Quaternion<N> p = new(MultiPrecision<N>.Cos(q.R) * MultiPrecision<N>.Cosh(vnorm), w * q.I, w * q.J, w * q.K);
 
-        //    return p;
-        //}
+            return p;
+        }
 
-        //public static Quaternion<N> Tan(Quaternion<N> q) {
-        //    MultiPrecision<N> vnorm = VectorPart(q).Magnitude;
+        public static Quaternion<N> Tan(Quaternion<N> q) {
+            MultiPrecision<N> vnorm = VectorPart(q).Magnitude;
 
-        //    MultiPrecision<N> sinhc = MultiPrecision<N>.Sinhc(vnorm), cosh = MultiPrecision<N>.Cosh(vnorm);
-        //    MultiPrecision<N> cos = MultiPrecision<N>.Cos(q.R), sin = MultiPrecision<N>.Sin(q.R);
+            MultiPrecision<N> sinhc = MultiPrecision<N>.Sinhc(vnorm), cosh = MultiPrecision<N>.Cosh(vnorm);
+            MultiPrecision<N> cos = MultiPrecision<N>.Cos(q.R), sin = MultiPrecision<N>.Sin(q.R);
 
-        //    MultiPrecision<N> wcos = cos * sinhc, wsin = -sin * sinhc;
+            MultiPrecision<N> wcos = cos * sinhc, wsin = -sin * sinhc;
 
-        //    Quaternion<N> qsin = new(sin * cosh, wcos * q.I, wcos * q.J, wcos * q.K);
-        //    Quaternion<N> qcos = new(cos * cosh, wsin * q.I, wsin * q.J, wsin * q.K);
+            Quaternion<N> qsin = new(sin * cosh, wcos * q.I, wcos * q.J, wcos * q.K);
+            Quaternion<N> qcos = new(cos * cosh, wsin * q.I, wsin * q.J, wsin * q.K);
 
-        //    return qsin / qcos;
-        //}
+            return qsin / qcos;
+        }
 
-        //public static Quaternion<N> Exp(Quaternion<N> q) {
-        //    MultiPrecision<N> vnorm = VectorPart(q).Magnitude;
-        //    MultiPrecision<N> w = MultiPrecision<N>.Sinc(vnorm, normalized: false);
+        public static Quaternion<N> Exp(Quaternion<N> q) {
+            MultiPrecision<N> vnorm = VectorPart(q).Magnitude;
+            MultiPrecision<N> w = MultiPrecision<N>.Sinc(vnorm, normalized: false);
 
-        //    Quaternion<N> p = new Quaternion<N>(MultiPrecision<N>.Cos(vnorm), w * q.I, w * q.J, w * q.K) * MultiPrecision<N>.Exp(q.R);
+            Quaternion<N> p = new Quaternion<N>(MultiPrecision<N>.Cos(vnorm), w * q.I, w * q.J, w * q.K) * MultiPrecision<N>.Exp(q.R);
 
-        //    return p;
-        //}
+            return p;
+        }
 
         public static Quaternion<N> Log(Quaternion<N> q) {
             if (IsNaN(q)) {
