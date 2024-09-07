@@ -6,22 +6,35 @@ namespace MultiPrecisionComplex {
 
     [DebuggerDisplay("{Convert<MultiPrecision.Pow2.N4>().ToString(),nq}")]
     public partial class Complex<N> : IFormattable where N : struct, IConstant {
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public const char ImaginaryUnit = 'i';
 
         public readonly MultiPrecision<N> R, I;
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public MultiPrecision<N> Norm => R * R + I * I;
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public MultiPrecision<N> Magnitude => MultiPrecision<N>.Sqrt(Norm);
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public MultiPrecision<N> Phase => MultiPrecision<N>.Atan2(I, R);
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public static Complex<N> Zero { get; } = MultiPrecision<N>.Zero;
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public static Complex<N> NaN { get; } = MultiPrecision<N>.NaN;
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public static Complex<N> One { get; } = (1, 0);
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public static Complex<N> ImaginaryOne { get; } = (0, 1);
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        public Complex<N> Conj => Conjugate(this);
 
         public static Complex<N> Conjugate(Complex<N> c) => new(c.R, -c.I);
 

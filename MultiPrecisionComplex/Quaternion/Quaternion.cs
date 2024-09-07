@@ -9,20 +9,35 @@ namespace MultiPrecisionComplex {
     public partial class Quaternion<N> : IFormattable where N : struct, IConstant {
         public readonly MultiPrecision<N> R, I, J, K;
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public MultiPrecision<N> Norm => R * R + I * I + J * J + K * K;
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public MultiPrecision<N> Magnitude => MultiPrecision<N>.Sqrt(Norm);
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public (MultiPrecision<N> x, MultiPrecision<N> y, MultiPrecision<N> z) Vector => (I, J, K);
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public static Quaternion<N> Zero { get; } = MultiPrecision<N>.Zero;
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public static Quaternion<N> NaN { get; } = MultiPrecision<N>.NaN;
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public static Quaternion<N> One { get; } = (1, 0, 0, 0);
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public static Quaternion<N> IOne { get; } = (0, 1, 0, 0);
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public static Quaternion<N> JOne { get; } = (0, 0, 1, 0);
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public static Quaternion<N> KOne { get; } = (0, 0, 0, 1);
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        public Quaternion<N> Conj => Conjugate(this);
 
         public static Quaternion<N> Conjugate(Quaternion<N> q) => new(q.R, -q.I, -q.J, -q.K);
 
