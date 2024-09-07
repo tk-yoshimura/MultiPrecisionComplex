@@ -10,6 +10,7 @@ namespace MultiPrecisionComplexTests {
             Complex<Pow2.N8> c = (2, 3);
 
             Assert.AreEqual((2, -3), Complex<Pow2.N8>.Conjugate(c));
+            Assert.AreEqual((2, -3), c.Conj);
         }
     }
 }

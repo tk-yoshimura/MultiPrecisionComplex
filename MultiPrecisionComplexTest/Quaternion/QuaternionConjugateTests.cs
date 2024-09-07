@@ -10,6 +10,7 @@ namespace MultiPrecisionComplexTests {
             Quaternion<Pow2.N8> c = (2, 3, 4, 5);
 
             Assert.AreEqual((2, -3, -4, -5), Quaternion<Pow2.N8>.Conjugate(c));
+            Assert.AreEqual((2, -3, -4, -5), c.Conj);
         }
     }
 }
