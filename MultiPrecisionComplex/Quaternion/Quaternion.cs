@@ -9,10 +9,8 @@ namespace MultiPrecisionComplex {
     public partial class Quaternion<N> : IFormattable where N : struct, IConstant {
         public readonly MultiPrecision<N> R, I, J, K;
 
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public MultiPrecision<N> Norm => R * R + I * I + J * J + K * K;
 
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public MultiPrecision<N> Magnitude => MultiPrecision<N>.Sqrt(Norm);
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

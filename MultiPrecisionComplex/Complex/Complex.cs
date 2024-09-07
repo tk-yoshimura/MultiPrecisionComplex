@@ -12,13 +12,10 @@ namespace MultiPrecisionComplex {
 
         public readonly MultiPrecision<N> R, I;
 
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public MultiPrecision<N> Norm => R * R + I * I;
 
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public MultiPrecision<N> Magnitude => MultiPrecision<N>.Sqrt(Norm);
 
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public MultiPrecision<N> Phase => MultiPrecision<N>.Atan2(I, R);
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
