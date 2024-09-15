@@ -44,6 +44,26 @@ namespace MultiPrecisionComplexTests {
         }
 
         [TestMethod()]
+        public void ExponentTest() {
+            Quaternion<Pow2.N8> c1 = new(2, 6, 0, 1);
+            Quaternion<Pow2.N8> c2 = new(9, 1, 2, 3);
+            Quaternion<Pow2.N8> c3 = new(2, 1, 16, 3);
+            Quaternion<Pow2.N8> c4 = new(2, 1, 2, 34);
+
+            Assert.AreEqual(2, c1.Exponent);
+            Assert.AreEqual(3, c2.Exponent);
+            Assert.AreEqual(4, c3.Exponent);
+            Assert.AreEqual(5, c4.Exponent);
+        }
+
+        [TestMethod()]
+        public void LdexpTest() {
+            Quaternion<Pow2.N8> c1 = new(2, 6, 3, 1);
+
+            Assert.AreEqual((8, 24, 12, 4), Quaternion<Pow2.N8>.Ldexp(c1, 2));
+        }
+
+        [TestMethod()]
         public void ToStringTest() {
             Quaternion<Pow2.N8> c1 = (2, 3, 0, 1);
             Quaternion<Pow2.N8> c2 = (2, 0, 1, 0);

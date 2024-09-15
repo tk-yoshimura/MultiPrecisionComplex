@@ -35,6 +35,22 @@ namespace MultiPrecisionComplexTests {
         }
 
         [TestMethod()]
+        public void ExponentTest() {
+            Complex<Pow2.N8> c1 = new(2, 6);
+            Complex<Pow2.N8> c2 = new(9, 1);
+
+            Assert.AreEqual(2, c1.Exponent);
+            Assert.AreEqual(3, c2.Exponent);
+        }
+
+        [TestMethod()]
+        public void LdexpTest() {
+            Complex<Pow2.N8> c1 = new(2, 6);
+
+            Assert.AreEqual((8, 24), Complex<Pow2.N8>.Ldexp(c1, 2));
+        }
+
+        [TestMethod()]
         public void ToStringTest() {
             Complex<Pow2.N8> c1 = (2, 3);
             Complex<Pow2.N8> c2 = (2, 0);
