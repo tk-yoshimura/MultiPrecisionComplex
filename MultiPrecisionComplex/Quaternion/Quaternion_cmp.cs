@@ -3,7 +3,7 @@ using MultiPrecision;
 
 namespace MultiPrecisionComplex {
 
-    public partial class Quaternion<N> {
+    public partial class Quaternion<N> : IEquatable<Quaternion<N>> {
 
         public static bool IsNaN(Quaternion<N> q)
             => MultiPrecision<N>.IsNaN(q.R) || MultiPrecision<N>.IsNaN(q.I) || MultiPrecision<N>.IsNaN(q.J) || MultiPrecision<N>.IsNaN(q.K);
@@ -24,6 +24,10 @@ namespace MultiPrecisionComplex {
 
         public override bool Equals(object obj) {
             return (obj is not null && obj is Quaternion<N> q) && q == this;
+        }
+
+        public bool Equals(Quaternion<N> other) {
+            return this == other;
         }
 
         public override int GetHashCode() {
