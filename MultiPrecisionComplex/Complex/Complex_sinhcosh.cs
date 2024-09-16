@@ -19,7 +19,7 @@ namespace MultiPrecisionComplex {
         }
 
         public static Complex<N> Tanh(Complex<N> z) {
-            return -ImaginaryOne * Tan(ImaginaryOne * z);
+            return MulMinusI(Tan(MulI(z)));
         }
     }
 }

@@ -79,5 +79,13 @@ namespace MultiPrecisionComplex {
 
             return new(z.R * s, -z.I * s);
         }
+
+        private static Complex<N> MulI(Complex<N> z) { 
+            return new(-z.I, z.R);
+        }
+
+        private static Complex<N> MulMinusI(Complex<N> z) { 
+            return new(z.I, -z.R);
+        }
     }
 }
