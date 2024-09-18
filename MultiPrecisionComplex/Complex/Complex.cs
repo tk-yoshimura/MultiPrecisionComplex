@@ -76,8 +76,8 @@ namespace MultiPrecisionComplex {
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public long Exponent => long.Max(R.Exponent, I.Exponent);
-    
-        public static Complex<N> Ldexp(Complex<N> c, long n){
+
+        public static Complex<N> Ldexp(Complex<N> c, long n) {
             return (MultiPrecision<N>.Ldexp(c.R, n), MultiPrecision<N>.Ldexp(c.I, n));
         }
 

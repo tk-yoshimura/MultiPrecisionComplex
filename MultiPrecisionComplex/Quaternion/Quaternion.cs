@@ -90,10 +90,10 @@ namespace MultiPrecisionComplex {
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public long Exponent => long.Max(long.Max(R.Exponent, I.Exponent), long.Max(J.Exponent, K.Exponent));
-    
-        public static Quaternion<N> Ldexp(Quaternion<N> q, long n){
+
+        public static Quaternion<N> Ldexp(Quaternion<N> q, long n) {
             return (
-                MultiPrecision<N>.Ldexp(q.R, n), MultiPrecision<N>.Ldexp(q.I, n), 
+                MultiPrecision<N>.Ldexp(q.R, n), MultiPrecision<N>.Ldexp(q.I, n),
                 MultiPrecision<N>.Ldexp(q.J, n), MultiPrecision<N>.Ldexp(q.K, n)
             );
         }

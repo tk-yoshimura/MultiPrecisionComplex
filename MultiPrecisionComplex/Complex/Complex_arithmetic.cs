@@ -96,11 +96,11 @@ namespace MultiPrecisionComplex {
             return Ldexp(new(z.R * s, -z.I * s), -exp);
         }
 
-        private static Complex<N> MulI(Complex<N> z) { 
+        private static Complex<N> MulI(Complex<N> z) {
             return new(-z.I, z.R);
         }
 
-        private static Complex<N> MulMinusI(Complex<N> z) { 
+        private static Complex<N> MulMinusI(Complex<N> z) {
             return new(z.I, -z.R);
         }
     }
