@@ -59,12 +59,22 @@ namespace MultiPrecisionComplex {
         }
 
         public static Complex<N> operator /(Complex<N> a, Complex<N> b) {
+            if (IsFinite(b) && !IsZero(b)) {
+                long exp = b.Exponent;
+                (a, b) = (Ldexp(a, -exp), Ldexp(b, -exp));
+            }
+
             MultiPrecision<N> s = 1d / b.Norm;
 
             return new((a.R * b.R + a.I * b.I) * s, (a.I * b.R - a.R * b.I) * s);
         }
 
         public static Complex<N> operator /(MultiPrecision<N> a, Complex<N> b) {
+            if (IsFinite(b) && !IsZero(b)) {
+                long exp = b.Exponent;
+                (a, b) = (MultiPrecision<N>.Ldexp(a, -exp), Ldexp(b, -exp));
+            }
+
             MultiPrecision<N> s = a / b.Norm;
 
             return new(b.R * s, -b.I * s);
@@ -75,9 +85,15 @@ namespace MultiPrecisionComplex {
         }
 
         public static Complex<N> Inverse(Complex<N> z) {
+            long exp = 0;
+            if (IsFinite(z) && !IsZero(z)) {
+                exp = z.Exponent;
+                z = Ldexp(z, -exp);
+            }
+
             MultiPrecision<N> s = 1d / z.Norm;
 
-            return new(z.R * s, -z.I * s);
+            return Ldexp(new(z.R * s, -z.I * s), -exp);
         }
 
         private static Complex<N> MulI(Complex<N> z) { 
