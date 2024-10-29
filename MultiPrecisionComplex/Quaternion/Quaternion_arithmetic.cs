@@ -63,6 +63,24 @@ namespace MultiPrecisionComplex {
             return new(a * b.R, a * b.I, a * b.J, a * b.K);
         }
 
+        public static Quaternion<N> operator *(Quaternion<N> a, Complex<N> b) {
+            return new(
+                a.R * b.R - a.I * b.I,
+                a.I * b.R + a.R * b.I,
+                a.J * b.R + a.K * b.I,
+                a.K * b.R - a.J * b.I
+            );
+        }
+
+        public static Quaternion<N> operator *(Complex<N> a, Quaternion<N> b) {
+            return new(
+                a.R * b.R - a.I * b.I,
+                a.I * b.R + a.R * b.I,
+                a.R * b.J - a.I * b.K,
+                a.I * b.J + a.R * b.K
+            );
+        }
+
         public static Quaternion<N> operator /(Quaternion<N> a, Quaternion<N> b) {
             if (IsFinite(b) && !IsZero(b)) {
                 long exp = b.Exponent;
@@ -92,6 +110,38 @@ namespace MultiPrecisionComplex {
 
         public static Quaternion<N> operator /(Quaternion<N> a, MultiPrecision<N> b) {
             return a * (1d / b);
+        }
+
+        public static Quaternion<N> operator /(Quaternion<N> a, Complex<N> b) {
+            if (Complex<N>.IsFinite(b) && !Complex<N>.IsZero(b)) {
+                long exp = b.Exponent;
+                (a, b) = (Ldexp(a, -exp), Complex<N>.Ldexp(b, -exp));
+            }
+
+            MultiPrecision<N> s = 1d / b.Norm;
+
+            return new(
+                (a.R * b.R + a.I * b.I) * s,
+                (a.I * b.R - a.R * b.I) * s,
+                (a.J * b.R - a.K * b.I) * s,
+                (a.K * b.R + a.J * b.I) * s
+            );
+        }
+
+        public static Quaternion<N> operator /(Complex<N> a, Quaternion<N> b) {
+            if (IsFinite(b) && !IsZero(b)) {
+                long exp = b.Exponent;
+                (a, b) = (Complex<N>.Ldexp(a, -exp), Ldexp(b, -exp));
+            }
+
+            MultiPrecision<N> s = 1d / b.Norm;
+
+            return new(
+                (a.R * b.R + a.I * b.I) * s,
+                (a.I * b.R - a.R * b.I) * s,
+                (-a.R * b.J + a.I * b.K) * s,
+                (-a.I * b.J - a.R * b.K) * s
+            );
         }
 
         public static Quaternion<N> Inverse(Quaternion<N> q) {

@@ -95,6 +95,16 @@ namespace MultiPrecisionComplexTests {
                     QuaternionAssert<Pow2.N8>.AreEqual(nc, c, 1e-7);
                 }
             }
+
+            Quaternion<Pow2.N8> q = (3, -9, 2, 4);
+
+            QuaternionAssert<Pow2.N8>.AreEqual(q * (2d, 0, 0, 0), q * 2, 1e-30);
+            QuaternionAssert<Pow2.N8>.AreEqual(q * (2d, -3, 0, 0), q * (2d, -3), 1e-30);
+            QuaternionAssert<Pow2.N8>.AreEqual(q * (2d, -3, 5, -7), q * (2d, -3, 5, -7), 1e-30);
+
+            QuaternionAssert<Pow2.N8>.AreEqual((2d, 0, 0, 0) * q, 2 * q, 1e-30);
+            QuaternionAssert<Pow2.N8>.AreEqual((2d, -3, 0, 0) * q, (2d, -3) * q, 1e-30);
+            QuaternionAssert<Pow2.N8>.AreEqual((2d, -3, 5, -7) * q, (2d, -3, 5, -7) * q, 1e-30);
         }
 
         [TestMethod()]
@@ -126,6 +136,16 @@ namespace MultiPrecisionComplexTests {
                     QuaternionAssert<Pow2.N8>.AreEqual(nc, c, 1e-6);
                 }
             }
+
+            Quaternion<Pow2.N8> q = (3, -9, 2, 4);
+
+            QuaternionAssert<Pow2.N8>.AreEqual(q / (2d, 0, 0, 0), q / 2, 1e-30);
+            QuaternionAssert<Pow2.N8>.AreEqual(q / (2d, -3, 0, 0), q / (2d, -3), 1e-30);
+            QuaternionAssert<Pow2.N8>.AreEqual(q / (2d, -3, 5, -7), q / (2d, -3, 5, -7), 1e-30);
+
+            QuaternionAssert<Pow2.N8>.AreEqual((2d, 0, 0, 0) / q, 2 / q, 1e-30);
+            QuaternionAssert<Pow2.N8>.AreEqual((2d, -3, 0, 0) / q, (2d, -3) / q, 1e-30);
+            QuaternionAssert<Pow2.N8>.AreEqual((2d, -3, 5, -7) / q, (2d, -3, 5, -7) / q, 1e-30);
         }
 
         [TestMethod()]
