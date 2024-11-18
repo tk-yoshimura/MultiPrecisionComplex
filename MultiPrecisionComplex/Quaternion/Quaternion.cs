@@ -9,8 +9,10 @@ namespace MultiPrecisionComplex {
     public partial class Quaternion<N> : IFormattable where N : struct, IConstant {
         public readonly MultiPrecision<N> R, I, J, K;
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public MultiPrecision<N> SquareNorm => R * R + I * I + J * J + K * K;
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public MultiPrecision<N> Norm {
             get {
                 if (MultiPrecision<N>.IsInfinity(R) || MultiPrecision<N>.IsInfinity(I) || MultiPrecision<N>.IsInfinity(J) || MultiPrecision<N>.IsInfinity(K)) {
