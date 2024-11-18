@@ -9,9 +9,11 @@ namespace MultiPrecisionComplex {
     public partial class Octonion<N> : IFormattable where N : struct, IConstant {
         public readonly MultiPrecision<N> R, I, J, K, W, X, Y, Z;
 
-        public MultiPrecision<N> Norm => R * R + I * I + J * J + K * K + W * W + X * X + Y * Y + Z * Z;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        public MultiPrecision<N> SquareNorm => R * R + I * I + J * J + K * K + W * W + X * X + Y * Y + Z * Z;
 
-        public MultiPrecision<N> Magnitude {
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        public MultiPrecision<N> Norm {
             get {
                 if (MultiPrecision<N>.IsInfinity(R) || MultiPrecision<N>.IsInfinity(I) || MultiPrecision<N>.IsInfinity(J) || MultiPrecision<N>.IsInfinity(K) ||
                     MultiPrecision<N>.IsInfinity(W) || MultiPrecision<N>.IsInfinity(X) || MultiPrecision<N>.IsInfinity(Y) || MultiPrecision<N>.IsInfinity(Z)) {
@@ -37,6 +39,9 @@ namespace MultiPrecisionComplex {
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        public MultiPrecision<N> Magnitude => Norm;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public static Octonion<N> Zero { get; } = MultiPrecision<N>.Zero;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -50,7 +55,8 @@ namespace MultiPrecisionComplex {
 
         public static Octonion<N> Conjugate(Octonion<N> q) => new(q.R, -q.I, -q.J, -q.K, -q.W, -q.X, -q.Y, -q.Z);
 
-        public static Octonion<N> Normal(Octonion<N> q) => q / q.Norm;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        public Octonion<N> Normal => this / Norm;
 
         public Octonion(MultiPrecision<N> r, MultiPrecision<N> i, MultiPrecision<N> j, MultiPrecision<N> k, MultiPrecision<N> w, MultiPrecision<N> x, MultiPrecision<N> y, MultiPrecision<N> z) {
             this.R = r;

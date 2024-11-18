@@ -20,8 +20,8 @@ namespace MultiPrecisionComplexTests {
             Assert.AreEqual(5, c2.I);
             Assert.AreEqual(7, c2.J);
             Assert.AreEqual(-2, c2.K);
-            Assert.AreEqual(4 * 4 + 5 * 5 + 7 * 7 + 2 * 2, c2.Norm);
-            Assert.AreEqual(MultiPrecision<Pow2.N8>.Sqrt(4 * 4 + 5 * 5 + 7 * 7 + 2 * 2), c2.Magnitude);
+            Assert.AreEqual(4 * 4 + 5 * 5 + 7 * 7 + 2 * 2, c2.SquareNorm);
+            Assert.AreEqual(MultiPrecision<Pow2.N8>.Sqrt(4 * 4 + 5 * 5 + 7 * 7 + 2 * 2), c2.Norm);
 
             Assert.AreEqual(6, c3.R);
             Assert.AreEqual(0, c3.I);
@@ -29,6 +29,8 @@ namespace MultiPrecisionComplexTests {
             Assert.AreEqual(0, c3.K);
 
             Assert.AreEqual((3, -1, 6), c1.Vector);
+
+            Assert.IsTrue((1 - c2.Normal.Norm) < 1e-30);
         }
 
         [TestMethod()]

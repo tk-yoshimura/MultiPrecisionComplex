@@ -1,4 +1,5 @@
 ﻿using MultiPrecision;
+using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
@@ -12,10 +13,37 @@ namespace MultiPrecisionComplex {
 
         public readonly MultiPrecision<N> R, I;
 
-        public MultiPrecision<N> Norm => R * R + I * I;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        public MultiPrecision<N> SquareNorm => R * R + I * I;
 
-        public MultiPrecision<N> Magnitude => MultiPrecision<N>.Sqrt(Norm);
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        public MultiPrecision<N> Norm {
+            get {
+                if (MultiPrecision<N>.IsInfinity(R) || MultiPrecision<N>.IsInfinity(I)) {
 
+                    return MultiPrecision<N>.PositiveInfinity;
+                }
+
+                long exp = Exponent;
+
+                if (exp <= int.MinValue) {
+                    return 0d;
+                }
+
+                Complex<N> o = Ldexp(this, -exp);
+
+                MultiPrecision<N> m = MultiPrecision<N>.Ldexp(
+                    MultiPrecision<N>.Sqrt(o.R * o.R + o.I * o.I), exp
+                );
+
+                return m;
+            }
+        }
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        public MultiPrecision<N> Magnitude => Norm;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public MultiPrecision<N> Phase => MultiPrecision<N>.Atan2(I, R);
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -35,7 +63,8 @@ namespace MultiPrecisionComplex {
 
         public static Complex<N> Conjugate(Complex<N> c) => new(c.R, -c.I);
 
-        public static Complex<N> Normal(Complex<N> c) => c / c.Norm;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        public Complex<N> Normal => this / Norm;
 
         public Complex(MultiPrecision<N> r, MultiPrecision<N> i) {
             this.R = r;

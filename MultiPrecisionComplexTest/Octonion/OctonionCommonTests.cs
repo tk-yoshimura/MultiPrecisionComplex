@@ -39,11 +39,11 @@ namespace MultiPrecisionComplexTests {
             Assert.AreEqual(-1, c4.Y);
             Assert.AreEqual(3, c4.Z);
 
-            Assert.AreEqual(4 * 4 + 5 * 5 + 7 * 7 + 2 * 2 + 3 * 3 + 4 * 4 + 1 * 1 + 3 * 3, c2.Norm);
-            Assert.AreEqual(MultiPrecision<Pow2.N4>.Sqrt(4 * 4 + 5 * 5 + 7 * 7 + 2 * 2 + 3 * 3 + 4 * 4 + 1 * 1 + 3 * 3), c2.Magnitude);
-            Assert.AreEqual(Octonion<Pow2.N4>.Ldexp(MultiPrecision<Pow2.N4>.Sqrt(4 * 4 + 5 * 5 + 7 * 7 + 2 * 2 + 3 * 3 + 4 * 4 + 1 * 1 + 3 * 3), 800), Octonion<Pow2.N4>.Ldexp(c2, 800).Magnitude);
-            Assert.AreEqual(Octonion<Pow2.N4>.Ldexp(MultiPrecision<Pow2.N4>.Sqrt(4 * 4 + 5 * 5 + 7 * 7 + 2 * 2 + 3 * 3 + 4 * 4 + 1 * 1 + 3 * 3), -800), Octonion<Pow2.N4>.Ldexp(c2, -800).Magnitude);
-            Assert.AreEqual(0d, Octonion<Pow2.N4>.Zero.Magnitude);
+            Assert.AreEqual(4 * 4 + 5 * 5 + 7 * 7 + 2 * 2 + 3 * 3 + 4 * 4 + 1 * 1 + 3 * 3, c2.SquareNorm);
+            Assert.AreEqual(MultiPrecision<Pow2.N4>.Sqrt(4 * 4 + 5 * 5 + 7 * 7 + 2 * 2 + 3 * 3 + 4 * 4 + 1 * 1 + 3 * 3), c2.Norm);
+            Assert.AreEqual(Octonion<Pow2.N4>.Ldexp(MultiPrecision<Pow2.N4>.Sqrt(4 * 4 + 5 * 5 + 7 * 7 + 2 * 2 + 3 * 3 + 4 * 4 + 1 * 1 + 3 * 3), 800), Octonion<Pow2.N4>.Ldexp(c2, 800).Norm);
+            Assert.AreEqual(Octonion<Pow2.N4>.Ldexp(MultiPrecision<Pow2.N4>.Sqrt(4 * 4 + 5 * 5 + 7 * 7 + 2 * 2 + 3 * 3 + 4 * 4 + 1 * 1 + 3 * 3), -800), Octonion<Pow2.N4>.Ldexp(c2, -800).Norm);
+            Assert.AreEqual(0d, Octonion<Pow2.N4>.Zero.Norm);
 
             Assert.AreEqual(6, c3.R);
             Assert.AreEqual(0, c3.I);
@@ -53,6 +53,8 @@ namespace MultiPrecisionComplexTests {
             Assert.AreEqual(0, c3.X);
             Assert.AreEqual(0, c3.Y);
             Assert.AreEqual(0, c3.Z);
+
+            Assert.IsTrue((1 - c2.Normal.Norm) < 1e-30);
         }
 
         [TestMethod()]

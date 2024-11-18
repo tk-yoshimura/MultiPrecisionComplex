@@ -58,7 +58,7 @@ namespace MultiPrecisionComplexTests {
         public void QuaternionMagnitudeTest() {
             Quaternion<Pow2.N4>[] qs = { (1, 2, 3, 4), (2, 5, -2, 6), (6, -3, 1, 2), (7, -3, 5, 1) };
 
-            CollectionAssert.AreEqual(new MultiPrecision<Pow2.N4>[] { qs[0].Magnitude, qs[1].Magnitude, qs[2].Magnitude, qs[3].Magnitude }, qs.Magnitude().ToArray());
+            CollectionAssert.AreEqual(new MultiPrecision<Pow2.N4>[] { qs[0].Norm, qs[1].Norm, qs[2].Norm, qs[3].Norm }, qs.Magnitude().ToArray());
         }
 
         [TestMethod()]
@@ -72,7 +72,7 @@ namespace MultiPrecisionComplexTests {
         public void QuaternionNormalTest() {
             Quaternion<Pow2.N4>[] qs = { (1, 2, 3, 4), (2, 5, -2, 6), (6, -3, 1, 2), (7, -3, 5, 1) };
 
-            CollectionAssert.AreEqual(new Quaternion<Pow2.N4>[] { Quaternion<Pow2.N4>.Normal(qs[0]), Quaternion<Pow2.N4>.Normal(qs[1]), Quaternion<Pow2.N4>.Normal(qs[2]), Quaternion<Pow2.N4>.Normal(qs[3]) }, qs.Normal().ToArray());
+            CollectionAssert.AreEqual(new Quaternion<Pow2.N4>[] { qs[0].Normal, qs[1].Normal, qs[2].Normal, qs[3].Normal }, qs.Normal().ToArray());
         }
     }
 }

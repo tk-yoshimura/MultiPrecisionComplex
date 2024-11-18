@@ -17,11 +17,13 @@ namespace MultiPrecisionComplexTests {
 
             Assert.AreEqual(4, c2.R);
             Assert.AreEqual(5, c2.I);
-            Assert.AreEqual(4 * 4 + 5 * 5, c2.Norm);
-            Assert.AreEqual(MultiPrecision<Pow2.N8>.Sqrt(4 * 4 + 5 * 5), c2.Magnitude);
+            Assert.AreEqual(4 * 4 + 5 * 5, c2.SquareNorm);
+            Assert.AreEqual(MultiPrecision<Pow2.N8>.Sqrt(4 * 4 + 5 * 5), c2.Norm);
 
             Assert.AreEqual(6, c3.R);
             Assert.AreEqual(0, c3.I);
+
+            Assert.IsTrue((1 - c2.Normal.Norm) < 1e-30);
         }
 
         [TestMethod()]

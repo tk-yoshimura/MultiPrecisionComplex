@@ -44,7 +44,7 @@ namespace MultiPrecisionComplexTests {
         public void ComplexMagnitudeTest() {
             Complex<Pow2.N4>[] cs = { (1, 2), (2, 5), (6, -3), (7, -3) };
 
-            CollectionAssert.AreEqual(new MultiPrecision<Pow2.N4>[] { cs[0].Magnitude, cs[1].Magnitude, cs[2].Magnitude, cs[3].Magnitude }, cs.Magnitude().ToArray());
+            CollectionAssert.AreEqual(new MultiPrecision<Pow2.N4>[] { cs[0].Norm, cs[1].Norm, cs[2].Norm, cs[3].Norm }, cs.Magnitude().ToArray());
         }
 
         [TestMethod()]
@@ -65,7 +65,7 @@ namespace MultiPrecisionComplexTests {
         public void ComplexNormalTest() {
             Complex<Pow2.N4>[] cs = { (1, 2), (2, 5), (6, -3), (7, -3) };
 
-            CollectionAssert.AreEqual(new Complex<Pow2.N4>[] { Complex<Pow2.N4>.Normal(cs[0]), Complex<Pow2.N4>.Normal(cs[1]), Complex<Pow2.N4>.Normal(cs[2]), Complex<Pow2.N4>.Normal(cs[3]) }, cs.Normal().ToArray());
+            CollectionAssert.AreEqual(new Complex<Pow2.N4>[] { cs[0].Normal, cs[1].Normal, cs[2].Normal, cs[3].Normal }, cs.Normal().ToArray());
         }
     }
 }

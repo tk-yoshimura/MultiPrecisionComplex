@@ -9,8 +9,8 @@ namespace MultiPrecisionComplex {
                 return NaN;
             }
 
-            MultiPrecision<N> qnorm = q.Magnitude;
-            MultiPrecision<N> vnorm = VectorPart(q).Magnitude;
+            MultiPrecision<N> qnorm = q.Norm;
+            MultiPrecision<N> vnorm = VectorPart(q).Norm;
 
             if (IsZero(vnorm)) {
                 return Complex<N>.Log(qnorm);

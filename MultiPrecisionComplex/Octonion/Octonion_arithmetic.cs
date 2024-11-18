@@ -175,7 +175,7 @@ namespace MultiPrecisionComplex {
                 (a, b) = (Ldexp(a, -exp), Ldexp(b, -exp));
             }
 
-            MultiPrecision<N> n = 1d / b.Norm;
+            MultiPrecision<N> n = 1d / b.SquareNorm;
 
             MultiPrecision<N> r = (+a.R * b.R + a.I * b.I + a.J * b.J + a.K * b.K + a.W * b.W + a.X * b.X + a.Y * b.Y + a.Z * b.Z) * n;
             MultiPrecision<N> i = (-a.R * b.I + a.I * b.R - a.J * b.K + a.K * b.J - a.W * b.X + a.X * b.W + a.Y * b.Z - a.Z * b.Y) * n;
@@ -195,7 +195,7 @@ namespace MultiPrecisionComplex {
                 (a, b) = (MultiPrecision<N>.Ldexp(a, -exp), Ldexp(b, -exp));
             }
 
-            MultiPrecision<N> n = a / b.Norm;
+            MultiPrecision<N> n = a / b.SquareNorm;
 
             MultiPrecision<N> r = +b.R * n;
             MultiPrecision<N> i = -b.I * n;
@@ -219,7 +219,7 @@ namespace MultiPrecisionComplex {
                 (a, b) = (Ldexp(a, -exp), Complex<N>.Ldexp(b, -exp));
             }
 
-            MultiPrecision<N> n = 1d / b.Norm;
+            MultiPrecision<N> n = 1d / b.SquareNorm;
 
             MultiPrecision<N> r = (+a.R * b.R + a.I * b.I) * n;
             MultiPrecision<N> i = (-a.R * b.I + a.I * b.R) * n;
@@ -239,7 +239,7 @@ namespace MultiPrecisionComplex {
                 (a, b) = (Complex<N>.Ldexp(a, -exp), Ldexp(b, -exp));
             }
 
-            MultiPrecision<N> n = 1d / b.Norm;
+            MultiPrecision<N> n = 1d / b.SquareNorm;
 
             MultiPrecision<N> r = (+a.R * b.R + a.I * b.I) * n;
             MultiPrecision<N> i = (-a.R * b.I + a.I * b.R) * n;
@@ -259,7 +259,7 @@ namespace MultiPrecisionComplex {
                 (a, b) = (Ldexp(a, -exp), Quaternion<N>.Ldexp(b, -exp));
             }
 
-            MultiPrecision<N> n = 1d / b.Norm;
+            MultiPrecision<N> n = 1d / b.SquareNorm;
 
             MultiPrecision<N> r = (+a.R * b.R + a.I * b.I + a.J * b.J + a.K * b.K) * n;
             MultiPrecision<N> i = (-a.R * b.I + a.I * b.R - a.J * b.K + a.K * b.J) * n;
@@ -279,7 +279,7 @@ namespace MultiPrecisionComplex {
                 (a, b) = (Quaternion<N>.Ldexp(a, -exp), Ldexp(b, -exp));
             }
 
-            MultiPrecision<N> n = 1d / b.Norm;
+            MultiPrecision<N> n = 1d / b.SquareNorm;
 
             MultiPrecision<N> r = (+a.R * b.R + a.I * b.I + a.J * b.J + a.K * b.K) * n;
             MultiPrecision<N> i = (-a.R * b.I + a.I * b.R - a.J * b.K + a.K * b.J) * n;
@@ -300,7 +300,7 @@ namespace MultiPrecisionComplex {
                 o = Ldexp(o, -exp);
             }
 
-            MultiPrecision<N> n = 1d / o.Norm;
+            MultiPrecision<N> n = 1d / o.SquareNorm;
 
             MultiPrecision<N> r = +o.R * n;
             MultiPrecision<N> i = -o.I * n;

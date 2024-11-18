@@ -12,7 +12,7 @@ namespace MultiPrecisionComplex {
                 return Zero;
             }
 
-            MultiPrecision<N> rho = z.Magnitude, theta = z.Phase;
+            MultiPrecision<N> rho = z.Norm, theta = z.Phase;
             MultiPrecision<N> phi = p.R * z.Phase + p.I * MultiPrecision<N>.Log(rho);
             MultiPrecision<N> s = MultiPrecision<N>.Pow(rho, p.R) * MultiPrecision<N>.Pow(MultiPrecision<N>.E, -p.I * theta);
 
@@ -20,11 +20,11 @@ namespace MultiPrecisionComplex {
         }
 
         public static Complex<N> Pow(Complex<N> z, MultiPrecision<N> p) {
-            return FromPolarCoordinates(MultiPrecision<N>.Pow(z.Magnitude, p), z.Phase * p);
+            return FromPolarCoordinates(MultiPrecision<N>.Pow(z.Norm, p), z.Phase * p);
         }
 
         public static Complex<N> Pow(Complex<N> z, long n) {
-            return FromPolarCoordinates(MultiPrecision<N>.Pow(z.Magnitude, n), z.Phase * n);
+            return FromPolarCoordinates(MultiPrecision<N>.Pow(z.Norm, n), z.Phase * n);
         }
 
         public static Complex<N> Pow2(Complex<N> z) {

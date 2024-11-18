@@ -9,9 +9,33 @@ namespace MultiPrecisionComplex {
     public partial class Quaternion<N> : IFormattable where N : struct, IConstant {
         public readonly MultiPrecision<N> R, I, J, K;
 
-        public MultiPrecision<N> Norm => R * R + I * I + J * J + K * K;
+        public MultiPrecision<N> SquareNorm => R * R + I * I + J * J + K * K;
 
-        public MultiPrecision<N> Magnitude => MultiPrecision<N>.Sqrt(Norm);
+        public MultiPrecision<N> Norm {
+            get {
+                if (MultiPrecision<N>.IsInfinity(R) || MultiPrecision<N>.IsInfinity(I) || MultiPrecision<N>.IsInfinity(J) || MultiPrecision<N>.IsInfinity(K)) {
+
+                    return MultiPrecision<N>.PositiveInfinity;
+                }
+
+                long exp = Exponent;
+
+                if (exp <= int.MinValue) {
+                    return 0d;
+                }
+
+                Quaternion<N> o = Ldexp(this, -exp);
+
+                MultiPrecision<N> m = MultiPrecision<N>.Ldexp(MultiPrecision<N>.Sqrt(
+                    o.R * o.R + o.I * o.I + o.J * o.J + o.K * o.K), exp
+                );
+
+                return m;
+            }
+        }
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        public MultiPrecision<N> Magnitude => Norm;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public (MultiPrecision<N> x, MultiPrecision<N> y, MultiPrecision<N> z) Vector => (I, J, K);
@@ -39,7 +63,8 @@ namespace MultiPrecisionComplex {
 
         public static Quaternion<N> Conjugate(Quaternion<N> q) => new(q.R, -q.I, -q.J, -q.K);
 
-        public static Quaternion<N> Normal(Quaternion<N> q) => q / q.Norm;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        public Quaternion<N> Normal => this / Norm;
 
         public static Quaternion<N> VectorPart(Quaternion<N> q) {
             return new Quaternion<N>(MultiPrecision<N>.Zero, q.I, q.J, q.K);

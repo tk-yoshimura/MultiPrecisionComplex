@@ -45,6 +45,12 @@ namespace MultiPrecisionComplex {
             }
         }
 
+        public static IEnumerable<MultiPrecision<N>> SquareNorm<N>(this IEnumerable<Quaternion<N>> source) where N : struct, IConstant {
+            foreach (var v in source) {
+                yield return v.SquareNorm;
+            }
+        }
+
         public static IEnumerable<MultiPrecision<N>> Norm<N>(this IEnumerable<Quaternion<N>> source) where N : struct, IConstant {
             foreach (var v in source) {
                 yield return v.Norm;
@@ -65,7 +71,7 @@ namespace MultiPrecisionComplex {
 
         public static IEnumerable<Quaternion<N>> Normal<N>(this IEnumerable<Quaternion<N>> source) where N : struct, IConstant {
             foreach (var v in source) {
-                yield return Quaternion<N>.Normal(v);
+                yield return v.Normal;
             }
         }
     }

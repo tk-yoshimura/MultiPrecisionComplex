@@ -9,12 +9,12 @@ namespace MultiPrecisionComplex {
                 return NaN;
             }
 
-            MultiPrecision<N> qnorm = q.Magnitude;
+            MultiPrecision<N> qnorm = q.Norm;
 
             MultiPrecision<N> phi = MultiPrecision<N>.Acos(q.R / qnorm) / 2;
 
             Quaternion<N> vec = VectorPart(q);
-            Quaternion<N> vnormal = vec / vec.Magnitude;
+            Quaternion<N> vnormal = vec / vec.Norm;
             if (IsNaN(vnormal)) {
                 return Complex<N>.Sqrt(q.R);
             }
@@ -31,12 +31,12 @@ namespace MultiPrecisionComplex {
                 return NaN;
             }
 
-            MultiPrecision<N> qnorm = q.Magnitude;
+            MultiPrecision<N> qnorm = q.Norm;
 
             MultiPrecision<N> phi = MultiPrecision<N>.Acos(q.R / qnorm) / 3;
 
             Quaternion<N> vec = VectorPart(q);
-            Quaternion<N> vnormal = vec / vec.Magnitude;
+            Quaternion<N> vnormal = vec / vec.Norm;
             if (IsNaN(vnormal)) {
                 return MultiPrecision<N>.Cbrt(q.R);
             }
@@ -57,12 +57,12 @@ namespace MultiPrecisionComplex {
                 return (x.Sign != Sign.Minus ? +1 : -1) * MultiPrecision<N>.Pow(MultiPrecision<N>.Abs(x), MultiPrecision<N>.Div(1, n));
             }
 
-            MultiPrecision<N> qnorm = q.Magnitude;
+            MultiPrecision<N> qnorm = q.Norm;
 
             MultiPrecision<N> phi = MultiPrecision<N>.Acos(q.R / qnorm) / n;
 
             Quaternion<N> vec = VectorPart(q);
-            Quaternion<N> vnormal = vec / vec.Magnitude;
+            Quaternion<N> vnormal = vec / vec.Norm;
             if (IsNaN(vnormal)) {
                 return ((n & 1) == 0) ? Complex<N>.RootN(q.R, n) : root_n(q.R, n);
             }
