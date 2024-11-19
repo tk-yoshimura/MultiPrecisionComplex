@@ -39,10 +39,8 @@ namespace MultiPrecisionComplex {
             }
         }
 
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public MultiPrecision<N> Magnitude => Norm;
 
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public MultiPrecision<N> Phase => MultiPrecision<N>.Atan2(I, R);
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

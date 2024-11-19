@@ -38,7 +38,6 @@ namespace MultiPrecisionComplex {
             }
         }
 
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public MultiPrecision<N> Magnitude => Norm;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
