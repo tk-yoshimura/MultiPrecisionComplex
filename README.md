@@ -1,5 +1,5 @@
 # MultiPrecisionComplex
- MultiPrecision Complex and Quaternion Implements 
+ MultiPrecision Complex and Quaternion Implements
 
 ## Requirement
 .NET 8.0  
