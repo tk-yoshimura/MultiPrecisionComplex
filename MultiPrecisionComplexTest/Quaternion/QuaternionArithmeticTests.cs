@@ -159,6 +159,16 @@ namespace MultiPrecisionComplexTests {
                     QuaternionAssert<Pow2.N8>.AreEqual(nc, c, 1e-6);
                 }
             }
+
+            foreach ((double x, double y, double z) in new[] { (1, 2, 3), (2, -4, 5), (4, 2, 1) }) {
+                foreach (double theta in new[] { 0.25, 0.5, 0.75 }) {
+
+                    Quaternion<Pow2.N8> c = Quaternion<Pow2.N8>.FromAxisAnglePi((x, y, z), theta);
+                    NQuaternion nc = NQuaternion.CreateFromAxisAngle(new System.Numerics.Vector3((float)x, (float)y, (float)z), (float)theta * float.Pi);
+
+                    QuaternionAssert<Pow2.N8>.AreEqual(nc, c, 1e-6);
+                }
+            }
         }
 
         [TestMethod()]
@@ -166,6 +176,13 @@ namespace MultiPrecisionComplexTests {
             foreach ((double yaw, double pitch, double roll) in new[] { (1, 2, 3), (2, -4, 5), (4, 2, 1) }) {
                 Quaternion<Pow2.N8> c = Quaternion<Pow2.N8>.FromYawPitchRoll(yaw, pitch, roll);
                 NQuaternion nc = NQuaternion.CreateFromYawPitchRoll((float)yaw, (float)pitch, (float)roll);
+
+                QuaternionAssert<Pow2.N8>.AreEqual(nc, c, 1e-6);
+            }
+
+            foreach ((double yaw, double pitch, double roll) in new[] { (1, 2, 3), (2, -4, 5), (4, 2, 1) }) {
+                Quaternion<Pow2.N8> c = Quaternion<Pow2.N8>.FromYawPitchRollPi(yaw, pitch, roll);
+                NQuaternion nc = NQuaternion.CreateFromYawPitchRoll((float)yaw * float.Pi, (float)pitch * float.Pi, (float)roll * float.Pi);
 
                 QuaternionAssert<Pow2.N8>.AreEqual(nc, c, 1e-6);
             }

@@ -137,5 +137,47 @@ namespace MultiPrecisionComplexTests {
                 ComplexAssert<Pow2.N8>.AreEqual(1, c * z, 1e-7);
             }
         }
+
+        [TestMethod()]
+        public void FromPhaseTest() {
+            foreach (double theta in new[] { 0.25, 0.5, 0.75 }) {
+
+                Complex<Pow2.N8> c = Complex<Pow2.N8>.FromPhase(theta);
+                NComplex nc = NComplex.FromPolarCoordinates(1, theta);
+
+                ComplexAssert<Pow2.N8>.AreEqual(nc, c, 1e-6);
+            }
+
+            foreach (double theta in new[] { 0.25, 0.5, 0.75 }) {
+
+                Complex<Pow2.N8> c = Complex<Pow2.N8>.FromPhasePi(theta);
+                NComplex nc = NComplex.FromPolarCoordinates(1, theta * double.Pi);
+
+                ComplexAssert<Pow2.N8>.AreEqual(nc, c, 1e-6);
+            }
+        }
+
+        [TestMethod()]
+        public void FromPolarTest() {
+            foreach (double norm in new[] { 0.5, 1, 2, 4 }) {
+                foreach (double theta in new[] { 0.25, 0.5, 0.75 }) {
+
+                    Complex<Pow2.N8> c = Complex<Pow2.N8>.FromPolar(norm, theta);
+                    NComplex nc = NComplex.FromPolarCoordinates(norm, theta);
+
+                    ComplexAssert<Pow2.N8>.AreEqual(nc, c, 1e-6);
+                }
+            }
+
+            foreach (double norm in new[] { 0.5, 1, 2, 4 }) {
+                foreach (double theta in new[] { 0.25, 0.5, 0.75 }) {
+
+                    Complex<Pow2.N8> c = Complex<Pow2.N8>.FromPolarPi(norm, theta);
+                    NComplex nc = NComplex.FromPolarCoordinates(norm, theta * double.Pi);
+
+                    ComplexAssert<Pow2.N8>.AreEqual(nc, c, 1e-6);
+                }
+            }
+        }
     }
 }
