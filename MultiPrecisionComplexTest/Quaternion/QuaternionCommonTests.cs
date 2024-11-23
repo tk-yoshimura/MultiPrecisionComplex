@@ -30,6 +30,9 @@ namespace MultiPrecisionComplexTests {
 
             Assert.AreEqual((3, -1, 6), c1.Vector);
 
+            Assert.AreEqual((0, 3, -1, 6), Quaternion<Pow2.N8>.FromVector((3, -1, 6)));
+            Assert.AreEqual((0, 3, -1, 6), Quaternion<Pow2.N8>.FromVector(3, -1, 6));
+
             Assert.IsTrue((1 - c2.Normal.Norm) < 1e-30);
         }
 

@@ -74,6 +74,14 @@ namespace MultiPrecisionComplex {
         public static Quaternion<N> RealPart(Quaternion<N> q) {
             return new Quaternion<N>(q.R, MultiPrecision<N>.Zero, MultiPrecision<N>.Zero, MultiPrecision<N>.Zero);
         }
+        
+        public static Quaternion<N> FromVector(MultiPrecision<N> x, MultiPrecision<N> y, MultiPrecision<N> z) {
+            return new(MultiPrecision<N>.Zero, x, y, z);
+        }
+
+        public static Quaternion<N> FromVector((MultiPrecision<N> x, MultiPrecision<N> y, MultiPrecision<N> z) v) {
+            return new(MultiPrecision<N>.Zero, v.x, v.y, v.z);
+        }
 
         public Quaternion(MultiPrecision<N> r, MultiPrecision<N> i, MultiPrecision<N> j, MultiPrecision<N> k) {
             this.R = r;
@@ -100,10 +108,6 @@ namespace MultiPrecisionComplex {
 
         public static implicit operator Quaternion<N>(Complex<N> z) {
             return new(z.R, z.I, MultiPrecision<N>.Zero, MultiPrecision<N>.Zero);
-        }
-
-        public static implicit operator Quaternion<N>((MultiPrecision<N> x, MultiPrecision<N> y, MultiPrecision<N> z) v) {
-            return new(MultiPrecision<N>.Zero, v.x, v.y, v.z);
         }
 
         public static implicit operator (MultiPrecision<N> r, MultiPrecision<N> i, MultiPrecision<N> j, MultiPrecision<N> k)(Quaternion<N> v) {
