@@ -67,7 +67,7 @@ namespace MultiPrecisionComplexTests {
             foreach (string test in tests) {
                 Console.WriteLine(test);
 
-                Assert.ThrowsException<FormatException>(() => {
+                Assert.ThrowsExactly<FormatException>(() => {
                     Complex<Pow2.N8> _ = test;
                 });
             }

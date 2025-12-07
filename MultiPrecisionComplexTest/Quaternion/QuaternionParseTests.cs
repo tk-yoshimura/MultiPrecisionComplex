@@ -94,7 +94,7 @@ namespace MultiPrecisionComplexTests {
             foreach (string test in tests) {
                 Console.WriteLine(test);
 
-                Assert.ThrowsException<FormatException>(() => {
+                Assert.ThrowsExactly<FormatException>(() => {
                     Quaternion<Pow2.N8> _ = test;
                 });
             }

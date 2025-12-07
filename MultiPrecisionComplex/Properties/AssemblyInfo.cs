@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("MultiPrecision.Complex")]
-[assembly: AssemblyCopyright("Copyright © T.Yoshimura 2023-2024")]
+[assembly: AssemblyCopyright("Copyright © T.Yoshimura 2023-2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -15,6 +15,6 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("E71B55EC-7E6D-4735-B7E1-5477CFFEAD09")]
 
-[assembly: AssemblyVersion("1.4.3.*")]
+[assembly: AssemblyVersion("2.0.0.*")]
 
 [assembly: InternalsVisibleTo("MultiPrecisionComplexTest")]

@@ -140,7 +140,7 @@ namespace MultiPrecisionComplexTests {
             foreach (string test in tests) {
                 Console.WriteLine(test);
 
-                Assert.ThrowsException<FormatException>(() => {
+                Assert.ThrowsExactly<FormatException>(() => {
                     Octonion<Pow2.N4> _ = test;
                 });
             }
